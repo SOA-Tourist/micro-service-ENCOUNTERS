@@ -1,15 +1,13 @@
 package com.example.encounters.controller;
 
+import com.example.encounters.DTO.EncounterDto;
 import com.example.encounters.model.Encounter;
 import com.example.encounters.service.EncounterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,8 +19,27 @@ public class EncounterController {
     private EncounterService encounterService;
 
     @GetMapping
-    public ResponseEntity<List<Encounter>> getAllCheckpointUnrelated() {
+    public ResponseEntity<List<EncounterDto>> getAllCheckpointUnrelated() {
         return  new ResponseEntity<>(encounterService.getAllCheckpointUnrelated(), HttpStatus.OK);
     }
 
+    @PutMapping("/update/{id}")
+    public ResponseEntity<EncounterDto> update(@PathVariable String id, @RequestBody EncounterDto dto) {
+        var dtoRet = encounterService.update(dto);
+        if(dtoRet == null) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }else {
+            return new ResponseEntity<>(dtoRet, HttpStatus.OK);
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable String id) {
+        return encounterService.delete(id) ? new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @PostMapping
+    public ResponseEntity<EncounterDto> create(@RequestBody EncounterDto dto) {
+        return new ResponseEntity<>(encounterService.create(dto), HttpStatus.OK);
+    }
 }

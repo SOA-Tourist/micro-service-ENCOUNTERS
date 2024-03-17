@@ -18,7 +18,7 @@ public class Encounter {
     private String id;
     private String name;
     private String description;
-   // private Coordinate coordinates;
+    private Coordinate coordinates;
     private int xp;
     private EncounterStatus status;
     private EncounterType type;
