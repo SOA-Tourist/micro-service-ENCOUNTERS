@@ -51,8 +51,19 @@ public class EncounterService {
 
     public List<EncounterDto> getAllActive() {
         List<Encounter> encounters = new ArrayList<>();
-        for(var e : encounterRepository.findAll()) {
-            if(e.getCheckpointId() == null && e.getStatus() == EncounterStatus.Active) {
+        for (var e : encounterRepository.findAll()) {
+            if (e.getCheckpointId() == null && e.getStatus() == EncounterStatus.Active) {
+                encounters.add(e);
+            }
+        }
+        return EncounterMapper.mapToDtoList(encounters);
+    }
+
+    public List<EncounterDto> getAllCheckpointRelated(){
+        List<Encounter> encounters = new ArrayList<>();
+        for(var e : encounterRepository.findAll()){
+            if(e.getCheckpointId() != null){
+
                 encounters.add(e);
             }
         }
@@ -80,4 +91,5 @@ public class EncounterService {
         }
         return result;
     }
+
 }
