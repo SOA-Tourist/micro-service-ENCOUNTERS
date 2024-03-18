@@ -23,6 +23,11 @@ public class EncounterController {
         return  new ResponseEntity<>(encounterService.getAllCheckpointUnrelated(), HttpStatus.OK);
     }
 
+    @GetMapping("/relate")
+    public ResponseEntity<List<EncounterDto>> getAllCheckpointRelated() {
+        return new ResponseEntity<>(encounterService.getAllCheckpointRelated(),HttpStatus.OK);
+    }
+
     @PutMapping("/update/{id}")
     public ResponseEntity<EncounterDto> update(@PathVariable String id, @RequestBody EncounterDto dto) {
         var dtoRet = encounterService.update(dto);

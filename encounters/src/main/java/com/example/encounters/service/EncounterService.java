@@ -41,4 +41,14 @@ public class EncounterService {
         Encounter encounter = EncounterMapper.mapToEntity(dto);
         return EncounterMapper.mapToDto(encounterRepository.save(encounter));
     }
+
+    public List<EncounterDto> getAllCheckpointRelated(){
+        List<Encounter> encounters = new ArrayList<>();
+        for(var e : encounterRepository.findAll()){
+            if(e.getCheckpointId() != null){
+                encounters.add(e);
+            }
+        }
+        return EncounterMapper.mapToDtoList(encounters);
+    }
 }
