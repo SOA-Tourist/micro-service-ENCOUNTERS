@@ -1,6 +1,7 @@
 package com.example.encounters.controller;
 
 import com.example.encounters.DTO.EncounterDto;
+import com.example.encounters.DTO.EncounterStatisticsDto;
 import com.example.encounters.model.Encounter;
 import com.example.encounters.service.EncounterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,5 +42,16 @@ public class EncounterController {
     @PostMapping
     public ResponseEntity<EncounterDto> create(@RequestBody EncounterDto dto) {
         return new ResponseEntity<>(encounterService.create(dto), HttpStatus.OK);
+    }
+
+    @GetMapping("/activate")
+    public ResponseEntity<List<EncounterDto>> getAllActive() {
+        return new ResponseEntity<>(encounterService.getAllActive(), HttpStatus.OK);
+    }
+
+    @GetMapping("/statistics/{encounterId}")
+    public ResponseEntity<EncounterStatisticsDto> getStatistics(@PathVariable String encounterId) {
+        var value = encounterService.getStatistics(encounterId);
+        return value != null ? new ResponseEntity<>(value, HttpStatus.OK) : new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 }
