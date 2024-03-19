@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 public class EncounterExecution {
     @Id
     private String id;
-    private long encounterId;
+    private String encounterId;
     private long touristId;
     private EncounterExecutionStatus status;
     private LocalDateTime lastActivity;

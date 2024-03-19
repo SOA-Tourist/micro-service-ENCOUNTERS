@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class EncounterExecutionDto {
     private String id;
-    private long encounterId;
+    private String encounterId;
     private long touristId;
     private EncounterExecutionStatus status;
     private LocalDateTime lastActivity;

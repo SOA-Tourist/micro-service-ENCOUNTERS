@@ -1,6 +1,7 @@
 package com.example.encounters.controller;
 
 import com.example.encounters.DTO.EncounterDto;
+import com.example.encounters.DTO.EncounterExecutionDto;
 import com.example.encounters.DTO.EncounterStatisticsDto;
 import com.example.encounters.model.Encounter;
 import com.example.encounters.service.EncounterService;
@@ -59,4 +60,6 @@ public class EncounterController {
         var value = encounterService.getStatistics(encounterId);
         return value != null ? new ResponseEntity<>(value, HttpStatus.OK) : new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
+
+
 }

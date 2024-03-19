@@ -52,7 +52,7 @@ public class EncounterService {
     public List<EncounterDto> getAllActive() {
         List<Encounter> encounters = new ArrayList<>();
         for (var e : encounterRepository.findAll()) {
-            if (e.getCheckpointId() == null && e.getStatus() == EncounterStatus.Active) {
+            if (e.getCheckpointId() == null) {
                 encounters.add(e);
             }
         }
@@ -63,7 +63,6 @@ public class EncounterService {
         List<Encounter> encounters = new ArrayList<>();
         for(var e : encounterRepository.findAll()){
             if(e.getCheckpointId() != null){
-
                 encounters.add(e);
             }
         }
